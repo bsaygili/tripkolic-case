@@ -12,7 +12,7 @@ export default function CustomInput({
     max: number
     defaultValue?: number,
     onChange: (val: string) => void,
-    displayValue?: string | number
+    displayValue?: string
     labelName: string
     type?: string
 }) {

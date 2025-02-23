@@ -17,7 +17,7 @@ export default function Filter({
     setFiltersApplied: (filters: { [key: string]: string | number } | ((prev: { [key: string]: string | number }) => { [key: string]: string | number })) => void,
     filtersApplied: FiltersType,
     selectedCategory: string,
-    setIsOpen: any
+    setIsOpen: (vl: boolean) => void,
     applyFilters: () => void;
     resetFilters: () => void;
 }) {
@@ -51,7 +51,7 @@ export default function Filter({
                             {filter.options && filter.options.length > 0 ? (
                                 <div className="flex flex-wrap gap-2 mt-1">
                                     {filter.options.map((option) => {
-                                        const isActive = filtersApplied[filter.name.toLowerCase()] === option;
+                                        const isActive = filtersApplied[filter?.name?.toLowerCase()]?.toString() === option as string;
                                         return (
                                             <button
                                                 key={option}
@@ -76,7 +76,7 @@ export default function Filter({
                                 max={Number(filter?.max ?? 0)}
                                 labelName={filter.name}
                                 defaultValue={filter.default}
-                                displayValue={filtersApplied[filter.name.toLowerCase()] ?? filter.default ?? 0 as number}
+                                displayValue={filtersApplied[filter.name.toLowerCase()]?.toString() ?? filter.default ?? "0" as string}
                                 onChange={(val) =>
                                     setFiltersApplied((prev) => ({
                                         ...prev,
