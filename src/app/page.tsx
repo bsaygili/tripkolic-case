@@ -8,14 +8,18 @@ import Filter from "@/components/Filter";
 import Card from "@/components/Card";
 
 import { sampleData } from "../../mockData";
-import { Categories, DataType, FiltersType } from "@/shared/types";
+import { Categories, DataType } from "@/shared/types";
+
+export type AppliedFilters = {
+  [key: string]: string | number;
+}
 
 
 
 export default function Home() {
   const [isFilterOpen, setIsFilterOpen] = React.useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = React.useState<Categories>("Tours");
-  const [filtersApplied, setFiltersApplied] = React.useState<FiltersType>({});
+  const [filtersApplied, setFiltersApplied] = React.useState<AppliedFilters>({});
   const [filteredData, setFilteredData] = React.useState<{ title?: string; price?: number; vehicleType?: string; passengers?: number; ratings?: string; discount?: number; discountedPrice?: number; imageSrc?: string; description?: string }[]>([]);
 
 

@@ -4,6 +4,7 @@ import React from 'react';
 import { categories, filters } from "../../mockData"
 import CustomInput from './CustomInput';
 import { Categories, FiltersType } from '@/shared/types';
+import { AppliedFilters } from '@/app/page';
 
 export default function Filter({
     setIsOpen,
@@ -15,7 +16,7 @@ export default function Filter({
     resetFilters
 }: {
     setSelectedCategory: React.Dispatch<React.SetStateAction<Categories>>,
-    setFiltersApplied: React.Dispatch<React.SetStateAction<FiltersType>>,
+    setFiltersApplied: React.Dispatch<React.SetStateAction<AppliedFilters>>,
     filtersApplied: FiltersType,
     selectedCategory: string,
     setIsOpen: (vl: boolean) => void,
@@ -57,9 +58,9 @@ export default function Filter({
                                             <button
                                                 key={option}
                                                 onClick={() =>
-                                                    setFiltersApplied((prev: FiltersType) => ({
+                                                    setFiltersApplied((prev: AppliedFilters) => ({
                                                         ...prev,
-                                                        [filter.name.toLowerCase()]: option as string
+                                                        [filter.name.toLowerCase()]: option
                                                     }))
                                                 }
                                                 className={`px-3 py-1 rounded ${isActive ? "bg-blue-500 text-white" : "bg-gray-200"
@@ -79,7 +80,7 @@ export default function Filter({
                                 defaultValue={filter.default}
                                 displayValue={filtersApplied[filter.name.toLowerCase()]?.toString() ?? filter.default ?? "0" as string}
                                 onChange={(val) =>
-                                    setFiltersApplied((prev: FiltersType) => ({
+                                    setFiltersApplied((prev: AppliedFilters) => ({
                                         ...prev,
                                         [filter.name.toLowerCase()]: val
                                     }))
