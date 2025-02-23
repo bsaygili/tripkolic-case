@@ -17,7 +17,7 @@ export default function Filter({
     setFiltersApplied: (filters: { [key: string]: string | number } | ((prev: { [key: string]: string | number }) => { [key: string]: string | number })) => void,
     filtersApplied: FiltersType,
     selectedCategory: string,
-    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
+    setIsOpen: any
     applyFilters: () => void;
     resetFilters: () => void;
 }) {
