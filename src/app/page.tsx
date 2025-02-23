@@ -8,13 +8,14 @@ import Filter from "@/components/Filter";
 import Card from "@/components/Card";
 
 import { sampleData } from "../../mockData";
-import { Categories, DataType } from "@/shared/types";
+import { Categories, DataType, FiltersType } from "@/shared/types";
+
 
 
 export default function Home() {
   const [isFilterOpen, setIsFilterOpen] = React.useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = React.useState<Categories>("Tours");
-  const [filtersApplied, setFiltersApplied] = React.useState<{ [key: string]: string }>({});
+  const [filtersApplied, setFiltersApplied] = React.useState<FiltersType>({});
   const [filteredData, setFilteredData] = React.useState<{ title?: string; price?: number; vehicleType?: string; passengers?: number; ratings?: string; discount?: number; discountedPrice?: number; imageSrc?: string; description?: string }[]>([]);
 
 
@@ -30,7 +31,10 @@ export default function Home() {
         if (typeof item[key] === "number") {
           return item[key] <= Number(value);
         } else {
-          return item[key] === value;
+          if (typeof item[key] === "string" && typeof value === "string") {
+            return item[key] === value;
+          }
+          return false;
         }
       });
     });

@@ -1,8 +1,9 @@
+
 'use strict';
 import React from 'react';
 import { categories, filters } from "../../mockData"
 import CustomInput from './CustomInput';
-import { FiltersType } from '@/shared/types';
+import { Categories, FiltersType } from '@/shared/types';
 
 export default function Filter({
     setIsOpen,
@@ -13,8 +14,8 @@ export default function Filter({
     filtersApplied,
     resetFilters
 }: {
-    setSelectedCategory: (category: string) => void,
-    setFiltersApplied: (filters: { [key: string]: string | number } | ((prev: { [key: string]: string | number }) => { [key: string]: string | number })) => void,
+    setSelectedCategory: React.Dispatch<React.SetStateAction<Categories>>,
+    setFiltersApplied: React.Dispatch<React.SetStateAction<FiltersType>>,
     filtersApplied: FiltersType,
     selectedCategory: string,
     setIsOpen: (vl: boolean) => void,
@@ -32,7 +33,7 @@ export default function Filter({
                     name="categories"
                     id="categories"
                     title="Choose a categories"
-                    onClick={(e) => { setSelectedCategory((e.target as HTMLSelectElement).value); setFiltersApplied({}) }}
+                    onClick={(e) => { setSelectedCategory((e.target as HTMLSelectElement).value as Categories); setFiltersApplied({}) }}
                 >
                     {categories.map((cat) => (
                         <option
@@ -56,9 +57,9 @@ export default function Filter({
                                             <button
                                                 key={option}
                                                 onClick={() =>
-                                                    setFiltersApplied((prev: { [key: string]: string | number }) => ({
+                                                    setFiltersApplied((prev: FiltersType) => ({
                                                         ...prev,
-                                                        [filter.name.toLowerCase()]: option
+                                                        [filter.name.toLowerCase()]: option as string
                                                     }))
                                                 }
                                                 className={`px-3 py-1 rounded ${isActive ? "bg-blue-500 text-white" : "bg-gray-200"
@@ -78,7 +79,7 @@ export default function Filter({
                                 defaultValue={filter.default}
                                 displayValue={filtersApplied[filter.name.toLowerCase()]?.toString() ?? filter.default ?? "0" as string}
                                 onChange={(val) =>
-                                    setFiltersApplied((prev) => ({
+                                    setFiltersApplied((prev: FiltersType) => ({
                                         ...prev,
                                         [filter.name.toLowerCase()]: val
                                     }))
