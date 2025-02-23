@@ -3,7 +3,7 @@
 import React from 'react';
 import { categories, filters } from "../../mockData"
 import CustomInput from './CustomInput';
-import { Categories, FiltersType } from '@/shared/types';
+import { Categories } from '@/shared/types';
 import { AppliedFilters } from '@/app/page';
 
 export default function Filter({
@@ -17,7 +17,7 @@ export default function Filter({
 }: {
     setSelectedCategory: React.Dispatch<React.SetStateAction<Categories>>,
     setFiltersApplied: React.Dispatch<React.SetStateAction<AppliedFilters>>,
-    filtersApplied: FiltersType,
+    filtersApplied: AppliedFilters,
     selectedCategory: string,
     setIsOpen: (vl: boolean) => void,
     applyFilters: () => void;
